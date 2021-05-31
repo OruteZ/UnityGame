@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Note
+  - mob
   layers:
   - Default
   - TransparentFX
