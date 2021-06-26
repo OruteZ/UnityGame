@@ -8,6 +8,7 @@ public class PlayerFight : MonoBehaviour
     Metronome rhythem;
     Animator anim;
     public bool isCounterOn = false;
+    public int HP = 20 ;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,22 +31,26 @@ public class PlayerFight : MonoBehaviour
     }
     void Counter()
     {
-        //공격하는 캐릭터 크기의 모션 따로 공수할 예정. 해당 스프라이트가 나오고 결정
+        
         Debug.Log("공격성공");
     }
     void Damaged()
     {
+        HP -= 1;
         Debug.Log("공격받음");
     }
-    void OnTriggerEnter(Collider col)
+    void OnTriggerStay2D(Collider2D col)
     {
-        if(col.gameObject.tag == "mob")
+        if (col.gameObject.tag == "mob")
         {
-            bool isMobAttacking = col.gameObject.GetComponent<Animator>().GetBool("isAttacking"); 
+            bool isMobAttacking = col.gameObject.GetComponent<Animator>().GetBool("isAttacking");
             if(isMobAttacking)
             {
-                if (isCounterOn) Counter();
-                else if (rhythem.accuracy <= 0) Damaged();
+                if (isCounterOn)
+                {
+                    col.gameObject.GetComponent<MonsterMove>().Killmob();
+                }
+                else Damaged();
             }
         }
     }

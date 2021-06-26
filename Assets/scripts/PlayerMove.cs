@@ -7,7 +7,7 @@ public class PlayerMove : MonoBehaviour
     Rigidbody2D rigid;
     SpriteRenderer rand;
     Animator anim;
-
+    public GameManager gameManager;
     public float Speed;
     public float jumpPower;
     // Start is called before the first frame update
@@ -56,5 +56,12 @@ public class PlayerMove : MonoBehaviour
         }
         
         
+    }
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Finish")
+        {
+            gameManager.NextStage();
+        }
     }
 }

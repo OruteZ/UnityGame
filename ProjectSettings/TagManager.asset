@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Note
   - mob
+  - attack
   layers:
   - Default
   - TransparentFX
