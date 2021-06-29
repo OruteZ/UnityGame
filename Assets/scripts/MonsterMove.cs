@@ -86,9 +86,4 @@ public class MonsterMove : MonoBehaviour
         anim.SetBool("isAttacking", true);
 
     }
-
-    void Killmob()
-    {
-
-    }
 }

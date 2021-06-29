@@ -64,4 +64,9 @@ public class PlayerMove : MonoBehaviour
             gameManager.NextStage();
         }
     }
+
+    public void VZero()
+    {
+        rigid.velocity = Vector2.zero;
+    }
 }

@@ -39,7 +39,7 @@ public class PlayerFight : MonoBehaviour
         HP -= 1;
         Debug.Log("공격받음");
     }
-    void OnTriggerStay2D(Collider2D col)
+    void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.tag == "mob")
         {
@@ -48,10 +48,11 @@ public class PlayerFight : MonoBehaviour
             {
                 if (isCounterOn)
                 {
-                    col.gameObject.GetComponent<MonsterMove>().Killmob();
+                   // col.gameObject.GetComponent<MonsterMove>().Killmob();
                 }
                 else Damaged();
             }
         }
     }
+
 }
