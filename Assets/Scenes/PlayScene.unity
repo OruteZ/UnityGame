@@ -1273,6 +1273,7 @@ MonoBehaviour:
   - {fileID: 809293769}
   - {fileID: 1318193490}
   player: {fileID: 1731296872}
+  metronome: {fileID: 189534000}
 --- !u!4 &554169891
 Transform:
   m_ObjectHideFlags: 0
@@ -1851,7 +1852,7 @@ PrefabInstance:
     - target: {fileID: 3146650824190944349, guid: 55e6c4f7f62e5194eb24acfaaeb04de8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.16
+      value: -0.98
       objectReference: {fileID: 0}
     - target: {fileID: 3146650824190944349, guid: 55e6c4f7f62e5194eb24acfaaeb04de8,
         type: 3}
