@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public int stageIndex;
     public GameObject[] Stages;
     public PlayerMove player;
+    public Metronome metronome;
+
     public void NextStage()
     {
         if (stageIndex < Stages.Length-1)
@@ -37,6 +39,14 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (metronome.Tempo())
+        {
+            int arrow = 0;
+            KeyCode key = player.GetLastKey();
+            if (key == KeyCode.LeftArrow) arrow = -1;
+            else if (key == KeyCode.RightArrow) arrow = 1;
+            
+            player.Move(arrow);
+        }
     }
 }
