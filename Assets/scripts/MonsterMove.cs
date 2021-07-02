@@ -7,7 +7,7 @@ public class MonsterMove : MonoBehaviour
     Rigidbody2D rigid;
     public int nextMove;
     public Transform player;
-    Metronome rhythem;
+    public Metronome rhythem;
     public GameObject Alert;
     public GameObject Atteck;
     SpriteRenderer rand;
@@ -27,50 +27,58 @@ public class MonsterMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 frontVec = new Vector2(rigid.position.x + nextMove, rigid.position.y);
-        Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
-        RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("platform"));
-        if (rhythem.metronom == 2)
+        if(rhythem.Tempo())
         {
-            alert();
-            rigid.velocity = new Vector2(0, 0);
-
-
-        }
-        else if (rhythem.metronom == 3)
-        {
-            attack();
-            rigid.velocity = new Vector2(0, 0);
-        }
-        else if(rayHit.collider == null)
-        {
-            anim.SetBool("isAttacking", false);
-            nextMove *= -1;
-            rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
-        }
-        else
-        {
-            anim.SetBool("isAttacking", false);
-            rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
+            Think();
         }
     }
 
     void FixedUpdate()
     {
-        if (rigid.velocity.x < 0) rand.flipX = false;
-        else if (rigid.velocity.x > 0) rand.flipX = true;
+        if (nextMove < 0) rand.flipX = false;
+        else if (nextMove > 0) rand.flipX = true;
+    }
+
+    /// <summary>
+    /// 몬스터가 이동할 때 호출
+    /// </summary>
+    /// <param name="arrow"> 0일시 무시, 양수면 오른쪽 이동, 음수면 왼쪽 이동</param>
+    public void Move(int arrow)
+    {
+        if (arrow > 0) transform.position += Vector3.right;
+        else if (arrow < 0) transform.position += Vector3.left;
     }
 
     void Think()
     {
         if(player.position.x - rigid.position.x < 5 && player.position.x - rigid.position.x > -5)
         {
-            if (player.position.x > rigid.position.x) nextMove = 1;
-            else nextMove = -1;
+            if(player.position.x - rigid.position.x <= 1 && player.position.x - rigid.position.x >= -1)
+            {
+                attack();
+            }
+            else
+            {
+                if (player.position.x > rigid.position.x) nextMove = 1;
+                else nextMove = -1;
+                Vector2 frontVec = new Vector2(rigid.position.x + nextMove, rigid.position.y);
+                Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
+                RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("platform"));
+                if (rayHit.collider == null)
+                {
+                    anim.SetBool("isAttacking", false);
+                    nextMove *= -1;
+                    Move(nextMove);
+                }
+                else
+                {
+                    anim.SetBool("isAttacking", false);
+                    Move(nextMove);
+                }
+            }
+                
         }
         else nextMove = Random.Range(-1, 2);
-
-        Invoke("Think", 2);
     }
 
     //공격하기 한 박자 전, 머리 위에 물음표를 띄우는 행위
