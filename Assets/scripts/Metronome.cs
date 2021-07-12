@@ -20,6 +20,7 @@ public class Metronome : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         time += Time.deltaTime;
         if (time >= 60d / bpm)
         {
@@ -27,10 +28,24 @@ public class Metronome : MonoBehaviour
             time -= 60d / bpm;
             accuracy = 20;
         }
+        */
     }
 
     void FixedUpdate()
     {
         if (accuracy > 0) accuracy--;
+    }
+
+    public bool Tempo()
+    {
+        time += Time.deltaTime;
+        if (time >= 60d / bpm)
+        {
+            metronom = (metronom + 1) % 4;
+            time -= 60d / bpm;
+            accuracy = 20;
+            return true;
+        }
+        return false;
     }
 }

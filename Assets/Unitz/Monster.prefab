@@ -167,5 +167,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextMove: 0
   player: {fileID: 0}
-  Alert: {fileID: 8039810785854201041, guid: 35b1ba6be4984d54ca938262fa5edfdc, type: 3}
-  Atteck: {fileID: 4895779587283583888, guid: 8564d592339bd7447bdc6754bb63c8b9, type: 3}

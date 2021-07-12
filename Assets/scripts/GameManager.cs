@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public int PlayerHP = 5;
     public int stageIndex;
     public GameObject[] Stages;
     public PlayerMove player;
+    public Image[] UIHP;
+
     public void NextStage()
     {
         if (stageIndex < Stages.Length-1)
@@ -37,6 +41,19 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+  
+    }
+
+    public void Damaged()
+    {
+        PlayerHP--;
+        UIHP[PlayerHP].color = new Color(1, 0, 0, 0.4f);
+        if (PlayerHP <= 0) GameOver();
+    }
+
+    void GameOver()
+    {
+        Debug.Log("게임 오버");
+        SceneManager.LoadScene("MainMenu");
     }
 }
